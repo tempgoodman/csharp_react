@@ -29,8 +29,10 @@ namespace Backend_API.Tests.Services
             var service = new ItemService(mockRepo.Object);
 
             var result = service.GetPaginatedItems(pageNumber, pageSize);
-            Assert.Equal(3, result.Count()); 
-            Assert.Equal("name 4", result.First().Name); 
+            Assert.Equal(3, result.Items.Count()); 
+            Assert.Equal("name 4", result.Items.First().Name); 
+            Assert.Equal(10, result.Meta.TotalRecords); 
+            Assert.Equal(4, result.Meta.TotalPages);
         }
 
         [Fact]
@@ -42,9 +44,9 @@ namespace Backend_API.Tests.Services
             
             var service = new ItemService(mockRepo.Object);
             
-            var result = service.GetPaginatedItems(5, 3);
-
-            Assert.Empty(result); 
+                var result = service.GetPaginatedItems(5, 3);
+                Assert.Empty(result.Items); 
+                Assert.Equal(10, result.Meta.TotalRecords);
         }
 
         [Theory]

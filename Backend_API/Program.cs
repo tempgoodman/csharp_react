@@ -13,6 +13,15 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddScoped<IItemRepository, ItemRepository>();
 builder.Services.AddScoped<ItemService>();
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll", policy =>
+        policy.AllowAnyOrigin()
+              .AllowAnyMethod()
+              .AllowAnyHeader());
+});
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,7 +55,7 @@ app.MapGet("/weatherforecast", () =>
 
 app.UseSwagger();
 app.UseSwaggerUI();
-
+app.UseCors("AllowAll");
 app.MapItemEndpoints();
 
 app.Run();
