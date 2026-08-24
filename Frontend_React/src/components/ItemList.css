@@ -1,0 +1,57 @@
+.item-list-container {
+  padding: 20px;
+  font-family: sans-serif;
+}
+
+.item-list-summary {
+  margin-bottom: 15px;
+  color: #555;
+  font-size: 1.1em;
+}
+
+.item-list-grid {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-bottom: 20px;
+}
+
+.item-card {
+  border: 1px solid #ccc;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+.item-card img {
+  border-radius: 4px;
+}
+
+.item-card p {
+  color: green;
+  font-weight: bold;
+}
+
+.item-list-controls {
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.item-list-controls button {
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.item-list-controls button:disabled {
+  cursor: not-allowed;
+}
+
+.item-list-controls select {
+  padding: 6px 10px;
+}
+
+.item-list-controls .current-page {
+  font-weight: bold;
+}
