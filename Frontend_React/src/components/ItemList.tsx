@@ -62,12 +62,19 @@ export default function ItemList() {
         Total: <strong>{totalRecords}</strong> items | page: <strong>{page} / {totalPages}</strong>
       </div>
       {loading ? (
-        <h3>Loading... </h3>
+        <h3>Please wait, it could take more then 50 sec due to the Server API need to cold boot... </h3>
       ) : (
         <div className="item-list-grid">
           {items.map(item => (
             <div key={item.id} className="item-card">
-              <img src={item.imageUrl} alt={item.name} />
+              <img
+                src={item.imageUrl}
+                alt={item.name}
+                onError={(event) => {
+                  event.currentTarget.onerror = null;
+                  event.currentTarget.src = '/image-placeholder.svg';
+                }}
+              />
               <h3>{item.name}</h3>
               <p>${item.price.toFixed(2)}</p>
             </div>

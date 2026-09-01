@@ -1,4 +1,4 @@
-import { render, screen } from '@testing-library/react';
+import { fireEvent, render, screen } from '@testing-library/react';
 import { vi, describe, it, expect, afterEach } from 'vitest';
 import ItemList from './ItemList';
 import { fetchWithAuth } from '../api/fetchClient';
@@ -28,7 +28,7 @@ describe('ItemList Component', () => {
     } as Response);
 
     render(<ItemList />);
-    expect(screen.getByText(/Loading/i)).toBeInTheDocument();
+    expect(screen.getByText(/Please wait, it could take more then 50 sec due to the Server API need to cold boot.../i)).toBeInTheDocument();
   });
 
   it('show correct total items and page info', async () => {
@@ -64,6 +64,23 @@ describe('ItemList Component', () => {
     expect(summaryDiv).toHaveTextContent(/Total:.*2.*items/i);
     expect(summaryDiv).toHaveTextContent(/page:.*1 \/ 1/i);
 
+  });
+
+  it('shows a placeholder when an item image cannot load', async () => {
+    vi.mocked(fetchWithAuth).mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        items: [{ id: 1, name: 'Unavailable image', price: 99.9, imageUrl: 'https://test.com/missing.jpg' }],
+        meta: { totalRecords: 1, totalPages: 1, currentPage: 1, pageSize: 6 }
+      })
+    } as Response);
+
+    render(<ItemList />);
+
+    const image = await screen.findByRole('img', { name: 'Unavailable image' });
+    fireEvent.error(image);
+
+    expect(image).toHaveAttribute('src', '/image-placeholder.svg');
   });
 
 });

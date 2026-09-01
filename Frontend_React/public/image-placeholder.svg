@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" role="img" aria-labelledby="title description">
+  <title id="title">Image unavailable</title>
+  <desc id="description">A neutral placeholder for a product image that could not be loaded.</desc>
+  <rect width="800" height="600" fill="#e8efeb" />
+  <rect x="40" y="40" width="720" height="520" rx="12" fill="none" stroke="#a8c8b8" stroke-width="8" />
+  <path d="M120 460l150-150 105 105 105-105 200 200H120z" fill="#b9d4c5" />
+  <circle cx="300" cy="205" r="48" fill="#8bb99f" />
+  <path d="M350 180h180M350 230h120" stroke="#547664" stroke-width="22" stroke-linecap="round" />
+</svg>
